@@ -1,0 +1,39 @@
+<!-- Sidebar -->
+
+<div class="be-left-sidebar">
+    <div class="left-sidebar-wrapper"><a href="/dashboard" class="left-sidebar-toggle">Dashboard</a>
+      <div class="left-sidebar-spacer">
+        <div class="left-sidebar-scroll">
+          <div class="left-sidebar-content">
+            <ul class="sidebar-elements">
+              <li class="divider">Menu</li>
+              <li class="{% if menu == 'dashboard' %} active {% endif %}"><a href="/dashboard"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+              </li>
+              <li class="parent {% if menu == 'penduduk' %} active open {% endif %}"><a href="#"><i class="icon mdi mdi-accounts-alt""></i><span>Implementasi</span></a>
+                <ul class="sub-menu">
+                  <li class="{% if submenu == 'dataPribadi' %} active {% endif %}"><a href="/pribadi/">Data Pribadi</a>
+                  </li>
+                  <li class="{% if submenu == 'kepalakeluarga' %} active {% endif %}"><a href="#">Data Polsek</a>
+                  </li>
+                  <li class="{% if submenu == 'anggotakeluarga' %} active {% endif %}"><a href="#">Data MedcenITS</a>
+                  </li>
+                  <li class="{% if submenu == 'sudahbekerja' %} active {% endif %}"><a href="#">Prosedur Lapor</a>
+                  </li>
+                  <li class="{% if submenu == 'belumbekerja' %} active {% endif %}"><a href="#">Website Resmi</a>
+                  </li>
+                  <li class="{% if submenu == 'belumbekerja' %} active {% endif %}"><a href="#">Data Lapor</a>
+                  </li>
+                  <li class="{% if submenu == 'belumbekerja' %} active {% endif %}"><a href="#">Nomor Layanan</a>
+                  </li>
+                </ul>
+              </li>
+          </div>
+        </div>
+      </div>
+      <div class="progress-widget">
+        <div class="progress-data" style="margin-left: 15px;">
+          <span class="name">Build with <i class="mdi mdi-coffee"></i> SBD D</span>
+        </div>
+      </div>
+    </div>
+  </div>

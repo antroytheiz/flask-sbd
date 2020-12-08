@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+
+{% block styles %}
+
+{% endblock styles %}
+
+
+{% block content %}
+
+<!-- Pribadi -->
+{% include 'snippets/pribadi.html' %}
+
+<!-- Polsek -->
+{% include 'snippets/polsek.html' %}
+
+<!-- MedcenITS -->
+{% include 'snippets/medcen.html' %}
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script  type="text/javascript" src="{{ url_for ('static', filename='assets/lib/jquery.niftymodals/dist/jquery.niftymodals.js') }}"></script>
+<script type="text/javascript">
+    $.fn.niftyModal('setDefaults',{
+    	overlaySelector: '.modal-overlay',
+    	closeSelector: '.modal-close',
+    	classAddAfterOpen: 'modal-show',
+    });
+</script>
+{% endblock scripts %}

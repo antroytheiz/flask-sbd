@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<!-- Mirrored from foxythemes.net/preview/products/beagle2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 14 Nov 2016 08:00:10 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{{ url_for ('static', filename='assets/img/logo-jpr-fav.png') }}">
+    <title>{{title}} | SBD D</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='assets/lib/material-design-icons/css/material-design-iconic-font.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='assets/lib/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='assets/lib/jqvmap/jqvmap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='assets/css/style.css') }}" type="text/css"/>
+    <!-- Styles -->
+        {% block styles %}
+
+        {% endblock styles %}
+    <!-- End Styles -->
+  </head>
+  <body>
+    <div class="be-wrapper be-fixed-sidebar">
+      <!-- Navbar/Topbar -->
+      {% include 'snippets/topbar.html' %}
+      
+      <!-- Sidebar -->
+      {% include 'snippets/sidebar.html' %}
+
+      <div class="be-content">
+        <div class="page-head">
+          <h2 class="page-head-title">{{title}}</h2>
+          <ol class="breadcrumb page-head-nav">
+            <li><a href="/dashboard">Dashboard</a></li>
+            {% if link2 %}
+              <li><a href="/{{link3}}">{{link1}}</a></li>
+              <li class="{% if link2 %} active {% endif %}">{{link2}}</li>
+            {% else %}
+              <li class="{% if link1 %} active {% endif %}">{{link1}}</li>
+            {% endif %}
+          </ol>
+        </div>
+        <div class="main-content container-fluid">
+          
+            <!-- Content -->
+            {% block content %}
+                
+            {% endblock content %}
+            <!-- End Content -->
+            
+        </div>
+
+    </div>
+    <script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for ('static', filename='assets/js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        //initialize the javascript
+        App.init();
+      });
+    </script>  
+    <!-- Scripts -->
+        {% block scripts %}
+            
+        {% endblock scripts %}
+    <!-- End Scripts -->
+
+  </body>
+
+<!-- Mirrored from foxythemes.net/preview/products/beagle2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 14 Nov 2016 08:01:49 GMT -->
+</html>

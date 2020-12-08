@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='assets/lib/select2/css/select2.min.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='assets/lib/bootstrap-slider/css/bootstrap-slider.css') }}"/>    
+{% endblock styles %}
+    
+
+{% block content %}
+<div class="col-sm-12">
+    <div class="panel panel-default panel-border-color panel-border-color-primary">
+      <div class="panel-heading panel-heading-divider">{{title}}<span class="panel-subtitle">Lengkapi data dibawah ini</span></div>
+      <div class="panel-body">
+        <form method="POST" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
+          <div class="form-group">
+            <label>Nama</label>
+            <input type="text" name="nama" parsley-trigger="change" required="" placeholder="Masukan nama lengkap" autocomplete="off" class="form-control" value="{% if data %}{{data[4]}}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label>Alamat</label>
+            <textarea name="alamat" class="form-control" required='' placeholder="{% if not data %} Masukan Alamat {% endif %}">{% if data %}{{data[5]}}{% endif %}</textarea>
+          </div>
+          <div class="form-group">
+            <label>NRP</label>
+            <input type="text" maxlength="14" name="nrp" placeholder="Masukan NRP" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[0]}}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label>KTP</label>
+            <input type="text" maxlength="14" name="ktp" placeholder="Masukan KTP" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label>KK</label>
+            <input type="text" maxlength="14" name="kk" placeholder="Masukan KK" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[2]}}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label>STNK</label>
+            <input type="text" maxlength="14" name="stnk" placeholder="Masukan STNK" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[3]}}{% endif %}">
+          </div>
+          <div class="form-group">
+            <label>Nomor HP</label>
+            <input type="text" maxlength="14" name="nophone" placeholder="Masukan No Telepon" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[6]}}{% endif %}">
+          </div>
+          <br><br>
+          <p class="text-right">
+            <button type="submit" class="btn btn-space btn-primary">{% if data %}Simpan {% else %}Tambah{% endif %}</button>
+            <a href="{% if title == 'Tambah Pribadi' or 'Ubah Pribadi' %} /pribadi/ {% else %} /pribadi/ {% endif %}" class="btn btn-space btn-default">Batal</a>
+          </p>
+        </form>
+      </div>
+    </div>
+</div>    
+{% endblock content %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/jquery-ui/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/jquery.nestable/jquery.nestable.js') }}"></script>
+<script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/moment.js/min/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/select2/js/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/bootstrap-slider/js/bootstrap-slider.js') }}"></script>
+<script type="text/javascript" src="{{ url_for ('static', filename='assets/lib/parsley/parsley.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //initialize the javascript
+        App.init();
+        $('form').parsley();
+        App.formElements();
+    });
+</script>    
+{% endblock scripts %}
+    
