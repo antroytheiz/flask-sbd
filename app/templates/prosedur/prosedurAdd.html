@@ -14,41 +14,23 @@
       <div class="panel-body">
         <form method="POST" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
           <div class="form-group">
-            <label>Nama</label>
-            <input type="text" name="nama" parsley-trigger="change" required="" placeholder="Masukan nama lengkap" autocomplete="off" class="form-control" value="{% if data %}{{data[4]}}{% endif %}">
+            <label>kode Polsek</label>
+            <input type="text" maxlength="14" name="kdPolsek" placeholder="Masukan Kode Polsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[0]}}{% endif %}">
           </div>
           <div class="form-group">
-            <label>Alamat</label>
-            <textarea name="alamat" class="form-control" required='' placeholder="{% if not data %} Masukan Alamat {% endif %}">{% if data %}{{data[5]}}{% endif %}</textarea>
+            <label>Prosedur Lapor Polsek</label>
+            <input type="text" name="laporPolsek" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+            <span class="panel-subtitle">Format Penamaan (NRP - Nama - Prosedur Lapor Polsek)</span>
           </div>
           <div class="form-group">
-            <label>NRP</label>
-            <input type="text" maxlength="14" name="nrp" placeholder="Masukan NRP" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[0]}}{% endif %}">
-          </div>
-          <div class="form-group">
-            <label>KTP</label>
-            <input type="text" maxlength="16" name="ktp" placeholder="Masukan KTP" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
-          </div>
-          <div class="form-group">
-            <label>KK</label>
-            <input type="text" maxlength="16" name="kk" placeholder="Masukan KK" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[2]}}{% endif %}">
-          </div>
-          <div class="form-group">
-            <label>STNK</label>
-            <input type="text" maxlength="16" name="stnk" placeholder="Masukan STNK" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[3]}}{% endif %}">
-          </div>
-          <div class="form-group">
-            <label>Nomor HP</label>
-            <input type="text" maxlength="12" name="nophone" placeholder="Masukan No Telepon" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[6]}}{% endif %}">
-          </div>
-          <div class="form-group">
-            <label>Kode Polsek</label>
-            <input type="text" maxlength="13" name="kodePolsek" placeholder="Masukan Kode Polsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[6]}}{% endif %}">
+            <label>Prosedur Lapor Medcen</label>
+            <input type="text" name="laporMedcen" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+            <span class="panel-subtitle">Format Penamaan (NRP - Nama -  Prosedur Lapor Medcen)</span>
           </div>
           <br><br>
           <p class="text-right">
             <button type="submit" class="btn btn-space btn-primary">{% if data %}Simpan {% else %}Tambah{% endif %}</button>
-            <a href="{% if title == 'Tambah Pribadi' or 'Ubah Pribadi' %} /pribadi/ {% else %} /pribadi/ {% endif %}" class="btn btn-space btn-default">Batal</a>
+            <a href="{% if title == 'Tambah Pribadi' or 'Ubah Pribadi' %} /prosedur/ {% else %} /prosedur/ {% endif %}" class="btn btn-space btn-default">Batal</a>
           </p>
         </form>
       </div>

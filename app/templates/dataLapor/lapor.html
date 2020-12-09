@@ -11,7 +11,7 @@
     <div class="col-sm-12">
         <div class="panel panel-default panel-table">
             <div class="panel-heading">{{title}}&nbsp;&nbsp;&nbsp;
-                <a href="{{ url_for ('pribadiAdd') }}">
+                <a href="{{ url_for ('medcenAdd') }}">
                     <button class="btn btn-space btn-primary">
                         <div class="icon mdi mdi-plus-circle-o">&nbsp;Tambah&nbsp; &nbsp; &nbsp; </div> 
                     </button>
@@ -35,6 +35,7 @@
                             <th style="width:20%;">Kejadian</th>
                             <th style="width:20%;">Nomor HP</th>
                             <th style="width:20%;">Lembaga Berwenang</th>
+                            <th></th>
                             <th class="actions">Aksi</th>
                         </tr>
                     </thead>
@@ -46,11 +47,12 @@
                                 <td>{{row[1]}}</td>
                                 <td>{{row[2]}}</td>
                                 <td>{{row[3]}}</td>
+                                <td></td>
                                 <td class="actions">
-                                    <a href="{{ url_for ('pribadiEdit', nrp=row[0])}}">
+                                    <a href="{{ url_for ('dataLaporEdit', nomorhp=row[2]) }}">
                                         <i class="icon mdi mdi-edit"></i>
                                     </a>&nbsp;&nbsp;
-                                    <buton data-toggle="modal" data-target="#md-footer-danger{{row[0]}}">
+                                    <buton data-toggle="modal" data-target="#md-footer-danger{{row[2]}}">
                                         <i class="icon mdi mdi-delete"></i>
                                     </buton>
                                 </td>
@@ -66,7 +68,7 @@
 
 <!-- Delete -->
 {% for row in data %}
-<div id="md-footer-danger{{row[0]}}" tabindex="-1" role="dialog" class="modal fade">
+<div id="md-footer-danger{{row[2]}}" tabindex="-1" role="dialog" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -80,8 +82,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-            <a href="{{ url_for ('pribadiDel', nrp=row[0]) }}" class="btn btn-danger">Delete</a>
+            <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+            <a href="{{ url_for ('dataLaporDel', nomorhp=row[2]) }}" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>

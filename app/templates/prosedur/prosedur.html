@@ -11,7 +11,7 @@
     <div class="col-sm-12">
         <div class="panel panel-default panel-table">
             <div class="panel-heading">{{title}}&nbsp;&nbsp;&nbsp;
-                <a href="{{ url_for ('pribadiAdd') }}">
+                <a href="{{ url_for ('prosedurAdd') }}">
                     <button class="btn btn-space btn-primary">
                         <div class="icon mdi mdi-plus-circle-o">&nbsp;Tambah&nbsp; &nbsp; &nbsp; </div> 
                     </button>
@@ -47,9 +47,6 @@
                                 <td>{{row[2]}}</td>
                                 <td></td>
                                 <td class="actions">
-                                    <a href="{{ url_for ('pribadiEdit', nrp=row[0])}}">
-                                        <i class="icon mdi mdi-edit"></i>
-                                    </a>&nbsp;&nbsp;
                                     <buton data-toggle="modal" data-target="#md-footer-danger{{row[0]}}">
                                         <i class="icon mdi mdi-delete"></i>
                                     </buton>
@@ -81,7 +78,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-            <a href="{{ url_for ('pribadiDel', nrp=row[0]) }}" class="btn btn-danger">Delete</a>
+            <a href="{{ url_for ('delProsedur', kodePolsek=row[0]) }}" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>
