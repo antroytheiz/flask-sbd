@@ -3,16 +3,6 @@
     <div class="col-sm-12">
         <div class="panel panel-default panel-table">
             <div class="panel-heading">Pribadi&nbsp;&nbsp;&nbsp;
-                <div class="input-group input-search pull-right">
-                <form action="#" method="post">
-                    <input type="text"  name="search" placeholder="Search" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default">
-                            <i class="icon mdi mdi-search"></i>
-                        </button>
-                    </span>
-                </form>
-                </div>
             </div>
             <div class="panel-body">
                 <table class="table table-striped table-hover">
@@ -25,20 +15,18 @@
                           <th style="width:13%;">KK</th>
                           <th style="width:13%;">STNK</th>
                           <th style="width:15%;">Nomor HP</th>
-                          <th style="width:15%;">Kode Polsek</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for row in data %}
                           <tr>
-                            <td>{{row[4]}}</td>
-                            <td>{{row[5]}}</td>
-                            <td>{{row[0]}}</td>
-                            <td>{{row[1]}}</td>
-                            <td>{{row[2]}}</td>
-                            <td>{{row[3]}}</td>
-                            <td>{{row[6]}}</td>
-                            <td>{{row[7]}}</td>
+                            <td>{{row.nama}}</td>
+                            <td>{{row.alamat}}</td>
+                            <td>{{row.nrp}}</td>
+                            <td>{{row.ktp}}</td>
+                            <td>{{row.kk}}</td>
+                            <td>{{row.stnk}}</td>
+                            <td>{{row.nomorHP}}</td>
                           </tr>
                         {% endfor %}
                     </tbody>

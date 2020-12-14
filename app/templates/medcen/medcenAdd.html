@@ -14,12 +14,8 @@
       <div class="panel-body">
         <form method="POST" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
           <div class="form-group">
-            <label>NRP</label>
-            <input type="text" maxlength="14" name="nrp" placeholder="Masukan NRP" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[0]}}{% endif %}">
-          </div>
-          <div class="form-group">
             <label>Alamat Kantor</label>
-            <textarea name="alamat" class="form-control" required='' placeholder="{% if not data %} Masukan Alamat {% endif %}">{% if data %}{{data[1]}}{% endif %}</textarea>
+            <textarea name="alamatKantor" class="form-control" required='' placeholder="{% if not data %} Masukan Alamat {% endif %}">{% if data %}{{data.alamatKantor}}{% endif %}</textarea>
           </div>
           <br><br>
           <p class="text-right">

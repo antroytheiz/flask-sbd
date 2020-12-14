@@ -15,15 +15,15 @@
         <form method="POST" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
           <div class="form-group">
             <label>kode Polsek</label>
-            <input type="text" maxlength="14" name="kdPolsek" placeholder="Masukan Kode Polsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[0]}}{% endif %}">
+            <input type="text" maxlength="14" name="kdPolsek" placeholder="Masukan Kode Polsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.kodePolsek}}{% endif %}">
           </div>
           <div class="form-group">
             <label>Nama Polsek</label>
-            <input type="text" name="namaPolsek" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+            <input type="text" name="namaPolsek" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data.namaPolsek}}{% endif %}">
           </div>
           <div class="form-group">
             <label>Alamat</label>
-            <textarea name="alamat" class="form-control" required='' placeholder="{% if not data %} Masukan Alamat {% endif %}">{% if data %}{{data[2]}}{% endif %}</textarea>
+            <textarea name="alamat" class="form-control" required='' placeholder="{% if not data %} Masukan Alamat {% endif %}">{% if data %}{{data.alamatKantor}}{% endif %}</textarea>
           </div>
           <br><br>
           <p class="text-right">
