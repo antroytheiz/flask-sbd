@@ -4,6 +4,13 @@
   <div class="container-fluid">
     <div class="be-right-navbar">
       <div class="page-title"><span>{{title}}</span></div>
+      <ul class="nav navbar-nav navbar-right be-user-nav">
+        <br>
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for ('logout') }}" class="btn btn-primary">
+            Logout
+          </a>
+        {% endif %}
       </ul>
     </div>
   </div>

@@ -11,20 +11,24 @@
               </li>
               <li class="parent {% if menu == 'penduduk' %} active open {% endif %}"><a href="#"><i class="icon mdi mdi-accounts-alt""></i><span>Implementasi</span></a>
                 <ul class="sub-menu">
-                  <li class="{% if submenu == 'dataPribadi' %} active {% endif %}"><a href="/pribadi/">Data Pribadi</a>
-                  </li>
-                  <li class="{% if submenu == 'dataPolsek' %} active {% endif %}"><a href="/polsek/">Data Polsek</a>
-                  </li>
-                  <li class="{% if submenu == 'dataMedcen' %} active {% endif %}"><a href="/medcen/">Data MedcenITS</a>
-                  </li>
-                  <li class="{% if submenu == 'dataProsedur Lapor' %} active {% endif %}"><a href="/prosedur/">Prosedur Lapor</a>
-                  </li>
-                  <li class="{% if submenu == 'dataWebsite Resmi' %} active {% endif %}"><a href="/website_resmi/">Website Resmi</a>
-                  </li>
-                  <li class="{% if submenu == 'dataNomor Layanan' %} active {% endif %}"><a href="/nomor_layanan/">Nomor Layanan</a>
-                  </li>
-                  <li class="{% if submenu == 'data Lapor' %} active {% endif %}"><a href="/data_lapor/">Data Lapor</a>
-                  </li>
+                  {% if current_user.username == 'pribadi' %}
+                    <li class="{% if submenu == 'dataPribadi' %} active {% endif %}"><a href="/pribadi/">Data Pribadi</a>
+                    </li>
+                    <li class="{% if submenu == 'data Lapor' %} active {% endif %}"><a href="/data_lapor/">Data Lapor</a>
+                    </li>
+                  {% elif current_user.username == 'polsek' %}
+                    <li class="{% if submenu == 'dataPolsek' %} active {% endif %}"><a href="/polsek/">Data Polsek</a>
+                    </li>
+                  {% else %}
+                    <li class="{% if submenu == 'dataMedcen' %} active {% endif %}"><a href="/medcen/">Data MedcenITS</a>
+                    </li>
+                    <li class="{% if submenu == 'dataProsedur Lapor' %} active {% endif %}"><a href="/prosedur/">Prosedur Lapor</a>
+                    </li>
+                    <li class="{% if submenu == 'dataWebsite Resmi' %} active {% endif %}"><a href="/website_resmi/">Website Resmi</a>
+                    </li>
+                    <li class="{% if submenu == 'dataNomor Layanan' %} active {% endif %}"><a href="/nomor_layanan/">Nomor Layanan</a>
+                    </li>
+                  {% endif %}
                 </ul>
               </li>
           </div>
