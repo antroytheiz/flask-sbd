@@ -3,7 +3,7 @@
 <nav class="navbar navbar-default navbar-fixed-top be-top-header">
   <div class="container-fluid">
     <div class="be-right-navbar">
-      <div class="page-title"><span>{{title}}</span></div>
+      <div class="page-title"><span>{{current_user.username|capitalize}}</span></div>
       <ul class="nav navbar-nav navbar-right be-user-nav">
         <br>
         {% if current_user.is_authenticated %}

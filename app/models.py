@@ -21,7 +21,7 @@ class Pribadi(db.Model):
     nomorHP = db.Column(db.Integer)
 
 class Polsek(db.Model):
-    kodePolsek = db.Column(db.Integer, primary_key=True, unique=True)
+    kodePolsek = db.Column(db.Integer, primary_key=True)
     namaPolsek = db.Column(db.String(100))
     alamatKantor = db.Column(db.String(100))
 
@@ -38,16 +38,16 @@ class DataLapor(db.Model):
 
 class NomorLayanan(db.Model):
     kodePolsek = db.Column(db.Integer, primary_key=True)
-    NomorLayananPolsek = db.Column(db.Integer)
-    NomorLayananMedcen = db.Column(db.Integer)
-    NomorDaruratPolsek = db.Column(db.Integer)
+    NomorLayananPolsek = db.Column(db.Integer, nullable=True)
+    NomorLayananMedcen = db.Column(db.Integer, nullable=True)
+    NomorDaruratPolsek = db.Column(db.Integer, nullable=True)
 
 class WebsiteResmi(db.Model):
     kodePolsek = db.Column(db.Integer, primary_key=True)
-    WebsiteResmiPolsek = db.Column(db.String(12))
-    WebsiteResmiMedcen = db.Column(db.String(12))
+    WebsiteResmiPolsek = db.Column(db.String(12), nullable=True)
+    WebsiteResmiMedcen = db.Column(db.String(12), nullable=True)
 
 class ProsedurLapor(db.Model):
     kodePolsek = db.Column(db.Integer, primary_key=True)    
-    ProsedurLaporPolsek = db.Column(db.String(12))
-    ProsedurLaporMedcen = db.Column(db.String(12))
+    ProsedurLaporPolsek = db.Column(db.String(12), nullable=True)
+    ProsedurLaporMedcen = db.Column(db.String(12), nullable=True)

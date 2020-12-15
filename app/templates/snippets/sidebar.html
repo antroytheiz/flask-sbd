@@ -19,15 +19,22 @@
                   {% elif current_user.username == 'polsek' %}
                     <li class="{% if submenu == 'dataPolsek' %} active {% endif %}"><a href="/polsek/">Data Polsek</a>
                     </li>
-                  {% else %}
-                    <li class="{% if submenu == 'dataMedcen' %} active {% endif %}"><a href="/medcen/">Data MedcenITS</a>
-                    </li>
-                    <li class="{% if submenu == 'dataProsedur Lapor' %} active {% endif %}"><a href="/prosedur/">Prosedur Lapor</a>
+                    <li class="{% if submenu == 'dataProsedur' %} active {% endif %}"><a href="/prosedur/">Prosedur Lapor</a>
                     </li>
                     <li class="{% if submenu == 'dataWebsite Resmi' %} active {% endif %}"><a href="/website_resmi/">Website Resmi</a>
                     </li>
                     <li class="{% if submenu == 'dataNomor Layanan' %} active {% endif %}"><a href="/nomor_layanan/">Nomor Layanan</a>
                     </li>
+                  {% elif current_user.username == 'medcen' %}
+                    <li class="{% if submenu == 'dataMedcen' %} active {% endif %}"><a href="/medcen/">Data MedcenITS</a>
+                    </li>
+                    <li class="{% if submenu == 'dataProsedur' %} active {% endif %}"><a href="/prosedur/">Prosedur Lapor</a>
+                    </li>
+                    <li class="{% if submenu == 'dataWebsite Resmi' %} active {% endif %}"><a href="/website_resmi/">Website Resmi</a>
+                    </li>
+                    <li class="{% if submenu == 'dataNomor Layanan' %} active {% endif %}"><a href="/nomor_layanan/">Nomor Layanan</a>
+                    </li>
+                  {% else %}
                   {% endif %}
                 </ul>
               </li>

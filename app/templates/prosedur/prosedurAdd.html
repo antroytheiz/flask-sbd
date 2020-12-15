@@ -15,18 +15,26 @@
         <form method="POST" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
           <div class="form-group">
             <label>kode Polsek</label>
-            <input type="text" maxlength="14" name="kdPolsek" placeholder="Masukan Kode Polsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[0]}}{% endif %}">
+            <select name="kodePolsek" parsley-trigger="change" required="" placeholder="Masukan Pekerjaan" autocomplete="off" class="form-control">
+                <option>-- Pilih Kode Polsek --</option>
+                {% for data in dataPolsek %}
+                  <option>{{data.kodePolsek}}</option>
+                {% endfor %}
+            </select>
           </div>
-          <div class="form-group">
-            <label>Prosedur Lapor Polsek</label>
-            <input type="text" name="laporPolsek" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
-            <span class="panel-subtitle">Format Penamaan (NRP - Nama - Prosedur Lapor Polsek)</span>
-          </div>
-          <div class="form-group">
-            <label>Prosedur Lapor Medcen</label>
-            <input type="text" name="laporMedcen" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
-            <span class="panel-subtitle">Format Penamaan (NRP - Nama -  Prosedur Lapor Medcen)</span>
-          </div>
+          {% if current_user.username == 'polsek' %}
+            <div class="form-group">
+              <label>Prosedur Lapor Polsek</label>
+              <input type="text" name="laporPolsek" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+              <span class="panel-subtitle">Format Penamaan (NRP - Nama - Prosedur Lapor Polsek)</span>
+            </div>
+          {% elif current_user.username == 'medcen' %}
+            <div class="form-group">
+              <label>Prosedur Lapor Medcen</label>
+              <input type="text" name="laporMedcen" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+              <span class="panel-subtitle">Format Penamaan (NRP - Nama -  Prosedur Lapor Medcen)</span>
+            </div>
+          {% endif %}
           <br><br>
           <p class="text-right">
             <button type="submit" class="btn btn-space btn-primary">{% if data %}Simpan {% else %}Tambah{% endif %}</button>
