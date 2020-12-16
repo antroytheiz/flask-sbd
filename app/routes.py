@@ -10,9 +10,8 @@ from .forms import LoginForm
 @app.route('/dashboard')
 @login_required
 def home():    
-    print(current_user.username)
     return render_template('index.html', title='Dashboard', menu='dashboard', 
-    data=Pribadi.query.all(), data2=Polsek.query.all(), data4=ProsedurLapor.query.all(), data5=NomorLayanan.query.all())
+    data=Pribadi.query.all(), data2=Polsek.query.all(), data3=Medcen.query.all(), data4=ProsedurLapor.query.all(), data5=NomorLayanan.query.all(), data6=WebsiteResmi.query.all())
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/login', methods=['GET','POST'])
