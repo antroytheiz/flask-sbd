@@ -12,7 +12,7 @@ from .forms import LoginForm
 def home():    
     print(current_user.username)
     return render_template('index.html', title='Dashboard', menu='dashboard', 
-    data=Pribadi.query.all(), data2=Polsek.query.all(), data4=ProsedurLapor.query.all())
+    data=Pribadi.query.all(), data2=Polsek.query.all(), data4=ProsedurLapor.query.all(), data5=NomorLayanan.query.all())
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/login', methods=['GET','POST'])
@@ -266,7 +266,7 @@ def prosedurDel(kodePolsek):
 # # Akhir Polsek
 
 
-# Awal Polsek
+# Awal NomorLayanan
 
 @app.route('/nomor_layanan/')
 def layanan():
@@ -307,88 +307,47 @@ def layananDel(kodePolsek):
     db.session.commit()
     return redirect(url_for('layanan'))
 
-# Akhir Polsek
+# Akhir NomorLayanan
 
 
-# # Awal Polsek
+# Awal WebsiteResmi
 
-# @app.route('/polsek/')
-# def polsek():
-#     return render_template('polsek/polsek.html', title='Polsek', submenu='dataPolsek', link1='Data Polsek' ,data=Polsek.query.all())
+@app.route('/website_resmi/')
+def website_resmi():
+    return render_template('webresmi/webresmi.html', title='Website Resmi', submenu='dataWebsite Resmi', link1='Data Website Resmi' ,data=WebsiteResmi.query.all())
 
-# @app.route('/polsek/tambah/', methods=['GET','POST'])
-# def polsekAdd():
-#     if request.method == 'POST':
-#         kodePolsek = request.form['kdPolsek']
-#         namaPolsek = request.form['namaPolsek']
-#         alamatPolsek = request.form['alamat']
-#         data = Polsek(kodePolsek=kodePolsek, namaPolsek=namaPolsek, alamatKantor=alamatPolsek)
-#         db.session.add(data)
-#         db.session.commit()
-#         return redirect(url_for('polsek'))
-#     else:
-#         return render_template('polsek/polsekAdd.html', title='Tambah Polsek', submenu='dataPolsek' ,link1='Data Polsek', link2='Tambah Data polsek', link3='polsek/')
+@app.route('/website_resmi/tambah/', methods=['GET','POST'])
+def website_resmiAdd():
+    if request.method == 'POST':
+        kodePolsek = request.form['kodePolsek']
+        webPolsek = request.form['webPolsek']
+        webMedcen = request.form['webMedcen']
+        data = WebsiteResmi(kodePolsek=kodePolsek, WebsiteResmiPolsek=webPolsek, WebsiteResmiMedcen=webMedcen)
+        db.session.add(data)
+        db.session.commit()
+        return redirect(url_for('website_resmi'))
+    else:
+        return render_template('webresmi/webresmiAdd.html', title='Tambah Website Resmi', submenu='dataWebsite Resmi' ,link1='Data Website Resmi', link2='Tambah Data Website Resmi', link3='website_resmi/', dataPolsek=Polsek.query.all())
 
-# @app.route('/polsek/<kodePolsek>/ubah/', methods=['GET','POST'])
-# def polsekEdit(kodePolsek):
-#     data = Polsek.query.filter_by(kodePolsek=kodePolsek).first()
-#     if request.method == 'POST':
-#         data.kodePolsek = request.form['kdPolsek']
-#         data.namaPolsek = request.form['namaPolsek']
-#         data.alamatKantor = request.form['alamat']
-#         db.session.add(data)
-#         db.session.commit()
-#         return redirect(url_for('polsek'))
-#     else:
-#         return render_template('polsek/polsekAdd.html', title='Ubah Polsek', submenu='dataPolsek' ,link1='Data Polsek', link2='Ubah Data Polsek', link3='polsek/', data=data)
+@app.route('/website_resmi/<kodePolsek>/ubah/', methods=['GET','POST'])
+def website_resmiEdit(kodePolsek):
+    data = WebsiteResmi.query.filter_by(kodePolsek=kodePolsek).first()
+    if request.method == 'POST':
+        data.kodePolsek = request.form['kodePolsek']
+        data.WebsiteResmiPolsek = request.form['webPolsek']
+        data.WebsiteResmiMedcen = request.form['webMedcen']
+        db.session.commit()
+        return redirect(url_for('website_resmi'))
+    else:
+        return render_template('webresmi/webresmiAdd.html', title='Ubah Website Resmi', submenu='dataWebsite Resmi' ,link1='Data Website Resmi', link2='Ubah Data Website Resmi', link3='website_resmi/', data=data, dataPolsek=Polsek.query.all())
 
-# @app.route('/polsek/<kodePolsek>/hapus/', methods=['GET','POST'])
-# def polsekDel(kodePolsek):
-#     data = Polsek.query.filter_by(kodePolsek=kodePolsek).first()
-#     db.session.delete(data)
-#     db.session.commit()
-#     return redirect(url_for('polsek'))
+@app.route('/website_resmi/<kodePolsek>/hapus/', methods=['GET','POST'])
+def website_resmiDel(kodePolsek):
+    data = WebsiteResmi.query.filter_by(kodePolsek=kodePolsek).first()
+    db.session.delete(data)
+    db.session.commit()
+    return redirect(url_for('website_resmi'))
 
-# # Akhir Polsek
+# Akhir WebsiteResmi
 
 
-# # Awal Polsek
-
-# @app.route('/polsek/')
-# def polsek():
-#     return render_template('polsek/polsek.html', title='Polsek', submenu='dataPolsek', link1='Data Polsek' ,data=Polsek.query.all())
-
-# @app.route('/polsek/tambah/', methods=['GET','POST'])
-# def polsekAdd():
-#     if request.method == 'POST':
-#         kodePolsek = request.form['kdPolsek']
-#         namaPolsek = request.form['namaPolsek']
-#         alamatPolsek = request.form['alamat']
-#         data = Polsek(kodePolsek=kodePolsek, namaPolsek=namaPolsek, alamatKantor=alamatPolsek)
-#         db.session.add(data)
-#         db.session.commit()
-#         return redirect(url_for('polsek'))
-#     else:
-#         return render_template('polsek/polsekAdd.html', title='Tambah Polsek', submenu='dataPolsek' ,link1='Data Polsek', link2='Tambah Data polsek', link3='polsek/')
-
-# @app.route('/polsek/<kodePolsek>/ubah/', methods=['GET','POST'])
-# def polsekEdit(kodePolsek):
-#     data = Polsek.query.filter_by(kodePolsek=kodePolsek).first()
-#     if request.method == 'POST':
-#         data.kodePolsek = request.form['kdPolsek']
-#         data.namaPolsek = request.form['namaPolsek']
-#         data.alamatKantor = request.form['alamat']
-#         db.session.add(data)
-#         db.session.commit()
-#         return redirect(url_for('polsek'))
-#     else:
-#         return render_template('polsek/polsekAdd.html', title='Ubah Polsek', submenu='dataPolsek' ,link1='Data Polsek', link2='Ubah Data Polsek', link3='polsek/', data=data)
-
-# @app.route('/polsek/<kodePolsek>/hapus/', methods=['GET','POST'])
-# def polsekDel(kodePolsek):
-#     data = Polsek.query.filter_by(kodePolsek=kodePolsek).first()
-#     db.session.delete(data)
-#     db.session.commit()
-#     return redirect(url_for('polsek'))
-
-# # Akhir Polsek

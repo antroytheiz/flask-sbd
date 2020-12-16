@@ -9,8 +9,9 @@
                     <thead>
                         <tr>
                           <th style="width:20%;">Kode Polsek</th>
-                          <th style="width:35%;">Nomor Layanan Polsek</th>
-                          <th style="width:35%;">Nomor Layanan Medcen</th>
+                          <th style="width:30%;">Nomor Layanan Polsek</th>
+                          <th style="width:30%;">Nomor Darurat Polsek</th>
+                          <th style="width:30%;">Nomor Layanan Medcen</th>
                           <th></th>
                           <th></th>
                         </tr>
@@ -18,9 +19,10 @@
                     <tbody>
                         {% for row in data5 %}
                           <tr>
-                            <td>{{row[0]}}</td>
-                            <td>{{row[1]}}</td>
-                            <td>{{row[2]}}</td>
+                            <td>{{row.kodePolsek}}</td>
+                            <td>{{row.NomorLayananPolsek}}</td>
+                            <td>{{row.NomorDaruratPolsek}}</td>
+                            <td>{{row.NomorLayananMedcen}}</td>
                             <td></td>
                             <td></td>
                           </tr>
