@@ -8,6 +8,7 @@ app.secret_key = 'dawfvdfsge'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sbd_proyek.sqlite'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://theis:salupa@localhost/sbdproyek'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['UPLOAD_FOLDER'] = 'app/static/files'
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)

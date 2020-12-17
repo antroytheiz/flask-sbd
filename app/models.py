@@ -49,5 +49,5 @@ class WebsiteResmi(db.Model):
 
 class ProsedurLapor(db.Model):
     kodePolsek = db.Column(db.Integer, primary_key=True)    
-    ProsedurLaporPolsek = db.Column(db.String(12), nullable=True)
-    ProsedurLaporMedcen = db.Column(db.String(12), nullable=True)
+    ProsedurLaporPolsek = db.Column(db.Text, nullable=True)
+    ProsedurLaporMedcen = db.Column(db.Text, nullable=True)

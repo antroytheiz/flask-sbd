@@ -234,8 +234,11 @@ def prosedur():
 def prosedurAdd():
     if request.method == 'POST':
         kodePolsek = request.form['kodePolsek']
-        laporPolsek = request.form['laporPolsek']
-        data = ProsedurLapor(kodePolsek=kodePolsek, ProsedurLaporPolsek=laporPolsek, ProsedurLaporMedcen='')
+        laporPolsek = request.files['laporPolsek']
+        laporMedcen = request.files['laporMedcen']
+        print(laporPolsek.filename)
+        print(laporMedcen.filename)
+        data = ProsedurLapor(kodePolsek=kodePolsek, ProsedurLaporPolsek=laporPolsek.filename, ProsedurLaporMedcen=laporMedcen.filename)
         db.session.add(data)
         db.session.commit()
         return redirect(url_for('prosedur'))

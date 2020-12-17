@@ -25,13 +25,12 @@
           {% if current_user.username == 'polsek' %}
             <div class="form-group">
               <label>Prosedur Lapor Polsek</label>
-              <input type="text" name="laporPolsek" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+              <input type="file" name="laporPolsek" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
               <span class="panel-subtitle">Format Penamaan (NRP - Nama - Prosedur Lapor Polsek)</span>
             </div>
-          {% elif current_user.username == 'medcen' %}
             <div class="form-group">
               <label>Prosedur Lapor Medcen</label>
-              <input type="text" name="laporMedcen" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+              <input type="file" name="laporMedcen" parsley-trigger="change" required="" placeholder="Masukan nama polsek" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
               <span class="panel-subtitle">Format Penamaan (NRP - Nama -  Prosedur Lapor Medcen)</span>
             </div>
           {% endif %}
