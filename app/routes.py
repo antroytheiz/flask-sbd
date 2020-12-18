@@ -14,7 +14,7 @@ def home():
     return render_template('index.html', title='Dashboard', menu='dashboard', 
     data=Pribadi.query.all(), data2=Polsek.query.all(), data3=Medcen.query.all(), data4a=ProsedurLaporPolsek.query.all(), 
     data4b=ProsedurLaporMedcen.query.all(), data5a=NomorLayananPolsek.query.all(), data5b=NomorLayananMedcen.query.all(), 
-    data6a=WebsiteResmiPolsek.query.all(), data6b=WebsiteResmiMedcen.query.all(), data7=DataLapor.query.all())
+    data6a=WebsiteResmiPolsek.query.all(),data6b=WebsiteResmiMedcen.query.all(), data7=DataLapor.query.all())
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/login', methods=['GET','POST'])
@@ -108,7 +108,7 @@ def laporAdd():
         db.session.commit()
         return redirect(url_for('lapor'))
     else:
-        return render_template('lapor/laporAdd.html', title='Data Lapor', submenu='data Lapor', link1='Data Lapor', link2='Tambah Data Lapor', link3='lapor/', data='')
+        return render_template('lapor/laporAdd.html', title='Data Lapor', submenu='data Lapor', link1='Data Lapor', link2='Tambah Data Lapor', link3='lapor/', data2=Pribadi.query.all())
 
 @app.route('/data_lapor/<id>/ubah/', methods=['GET','POST'])
 @login_required
@@ -252,26 +252,26 @@ def prosedurAdd():
     else:
         return render_template('prosedur/prosedurAdd.html', title='Tambah Prosedur', submenu='dataProsedur' ,link1='Data Prosedur', link2='Tambah Data Prosedur', link3='polsek/', dataPolsek=Polsek.query.all())
 
-@app.route('/prosedur/<id>/ubah/', methods=['GET','POST'])
-@login_required
-def prosedurEdit(id):
-    if current_user.username == 'polsek':
-        data = ProsedurLaporPolsek.query.filter_by(id=id).first()
-    if current_user.username == 'medcen':
-        data2 = ProsedurLaporMedcen.query.filter_by(id=id).first()
-    if request.method == 'POST':
-        if current_user.username == 'polsek':
-            data.kodePolsek = request.form['kodePolsek']
-            data.ProsedurLaporPolsek = request.files['laporPolsek']
-            db.session.commit()
-            return redirect(url_for('prosedur'))
-        if current_user.username == 'medcen':
-            data2.kodePolsek = request.form['kodePolsek']
-            data2.ProsedurLaporMedcen = request.files['laporMedcen']
-            db.session.commit()
-            return redirect(url_for('prosedur'))
-    else:
-        return render_template('prosedur/prosedurAdd.html', title='Ubah Prosedur', submenu='dataProsedur' ,link1='Data Prosedur', link2='Ubah Data Prosedur', link3='prosedur/', data=data, dataPolsek=Polsek.query.all())
+# @app.route('/prosedur/<id>/ubah/', methods=['GET','POST'])
+# @login_required
+# def prosedurEdit(id):
+#     if current_user.username == 'polsek':
+#         data = ProsedurLaporPolsek.query.filter_by(id=id).first()
+#     if current_user.username == 'medcen':
+#         data2 = ProsedurLaporMedcen.query.filter_by(id=id).first()
+#     if request.method == 'POST':
+#         if current_user.username == 'polsek':
+#             data.kodePolsek = request.form['kodePolsek']
+#             data.ProsedurLaporPolsek = request.files['laporPolsek']
+#             db.session.commit()
+#             return redirect(url_for('prosedur'))
+#         if current_user.username == 'medcen':
+#             data2.kodePolsek = request.form['kodePolsek']
+#             data2.ProsedurLaporMedcen = request.files['laporMedcen']
+#             db.session.commit()
+#             return redirect(url_for('prosedur'))
+#     else:
+#         return render_template('prosedur/prosedurAdd.html', title='Ubah Prosedur', submenu='dataProsedur' ,link1='Data Prosedur', link2='Ubah Data Prosedur', link3='prosedur/', data=data, dataPolsek=Polsek.query.all())
 
 @app.route('/prosedur/<id>/hapus/', methods=['GET','POST'])
 @login_required

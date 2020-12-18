@@ -13,9 +13,18 @@
       <div class="panel-heading panel-heading-divider">{{title}}<span class="panel-subtitle">Lengkapi data dibawah ini</span></div>
       <div class="panel-body">
         <form method="POST" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label>Nama</label>
               <input type="text" maxlength="14" name="nama" placeholder="Masukan nama" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.nama}}{% endif %}">
+            </div> -->
+            <div class="form-group">
+              <label>Nama</label>
+              <select name="nama" parsley-trigger="change" required="" placeholder="Masukan Pekerjaan" autocomplete="off" class="form-control">
+                <option>{% if data %}{{data.nama}}{% else %}Masukan Nama{% endif %}</option>
+                {% for data2 in data2 %}
+                    <option>{{data2.nama}}</option>
+                  {% endfor %}
+              </select>
             </div>
             <div class="form-group">
                 <label>Kejadian</label>
@@ -28,22 +37,22 @@
             <div class="form-group">
               <label>Lembaga berwenenang</label>
               <select name="lembaga" parsley-trigger="change" required="" autocomplete="off" class="form-control">
-                  {% if data.lembagaBerwenang == 'Polsek' %}
+                  {% if not data  %}
+                    <option>Polsek</option>  
+                    <option>Medcen</option>
+                  {% elif data.lembagaBerwenang == 'Polsek' %}
                     <option>{% if data %}{{ data.lembagaBerwenang}}{% endif %}</option>  
                     <option>Medcen</option>
                   {% elif data.lembagaBerwenang == 'Medcen' %}
                     <option>{% if data %}{{ data.lembagaBerwenang}}{% endif %}</option>  
                     <option>Polsek</option>
-                  {% else %}
-                    <option>Polsek</option>  
-                    <option>Medcen</option>
                   {% endif %}
               </select>
             </div>
           <br><br>
           <p class="text-right">
             <button type="submit" class="btn btn-space btn-primary">{% if data %}Simpan {% else %}Tambah{% endif %}</button>
-            <a href="{% if title == 'Tambah Pribadi' or 'Ubah Pribadi' %} /data_lapor/ {% else %} /data_lapor/ {% endif %}" class="btn btn-space btn-default">Batal</a>
+            <a href="{% if title == 'Tambah Data Lapor' or 'Ubah Data Lapor' %} /data_lapor/ {% else %} /data_lapor/ {% endif %}" class="btn btn-space btn-default">Batal</a>
           </p>
         </form>
       </div>

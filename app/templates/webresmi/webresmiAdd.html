@@ -16,7 +16,7 @@
             <div class="form-group">
               <label>kode Polsek</label>
               <select name="kodePolsek" parsley-trigger="change" required="" placeholder="Masukan Pekerjaan" autocomplete="off" class="form-control">
-                  <option>{% if data %}{{data.kodePolsek}} {% else %} -- Pilih Kode Polsek -- {% endif %} </option>
+                  <option>{% if data or data2 %}{{data.kodePolsek}}{{data2.kodePolsek}}{% else %} -- Pilih Kode Polsek -- {% endif %} </option>
                   {% for data in dataPolsek %}
                     <option>{{data.kodePolsek}}</option>
                   {% endfor %}
@@ -35,7 +35,7 @@
             {% endif %}
           <br><br>
           <p class="text-right">
-            <button type="submit" class="btn btn-space btn-primary">{% if data %}Simpan {% else %}Tambah{% endif %}</button>
+            <button type="submit" class="btn btn-space btn-primary">{% if data or data2 %}Simpan {% else %}Tambah{% endif %}</button>
             <a href="{% if title == 'Tambah Pribadi' or 'Ubah Pribadi' %} /website_resmi/ {% else %} /website_resmi/ {% endif %}" class="btn btn-space btn-default">Batal</a>
           </p>
         </form>

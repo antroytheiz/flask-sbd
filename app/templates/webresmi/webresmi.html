@@ -77,7 +77,7 @@
 
 <!-- Delete -->
 {% for row in data %}
-<div id="md-footer-danger{{row.kodePolsek}}" tabindex="-1" role="dialog" class="modal fade">
+<div id="md-footer-danger{{row.id}}" tabindex="-1" role="dialog" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -92,7 +92,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-            <a href="{{ url_for ('webresmiDel', kodePolsek=row.kodePolsek)}}" class="btn btn-danger">Delete</a>
+            <a href="{{ url_for ('webresmiDel', id=row.id)}}" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>
