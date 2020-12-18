@@ -15,19 +15,30 @@
         <form method="POST" data-parsley-validate="" novalidate="" enctype="multipart/form-data">
             <div class="form-group">
               <label>Nama</label>
-              <input type="text" maxlength="14" name="nama" placeholder="Masukan nama" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[0]}}{% endif %}">
+              <input type="text" maxlength="14" name="nama" placeholder="Masukan nama" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.nama}}{% endif %}">
             </div>
             <div class="form-group">
                 <label>Kejadian</label>
-                <input type="text" maxlength="100" name="kejadian" placeholder="Masukan Kejadian" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+                <input type="text" maxlength="100" name="kejadian" placeholder="Masukan Kejadian" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.kejadian}}{% endif %}">
             </div>
             <div class="form-group">
                 <label>Nomor HP</label>
-                <input type="text" maxlength="12" name="nophone" placeholder="Masukan Nomor HP" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[2]}}{% endif %}">
+                <input type="text" maxlength="12" name="nophone" placeholder="Masukan Nomor HP" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.nomorHP}}{% endif %}">
             </div>
             <div class="form-group">
-                <label>Lembaga berwenenang</label>
-                <input type="text" maxlength="50" name="lembaga" placeholder="Masukan Lembaga berwenang" required="" autocomplete="off" class="form-control" value="{% if data %}{{data[1]}}{% endif %}">
+              <label>Lembaga berwenenang</label>
+              <select name="lembaga" parsley-trigger="change" required="" autocomplete="off" class="form-control">
+                  {% if data.lembagaBerwenang == 'Polsek' %}
+                    <option>{% if data %}{{ data.lembagaBerwenang}}{% endif %}</option>  
+                    <option>Medcen</option>
+                  {% elif data.lembagaBerwenang == 'Medcen' %}
+                    <option>{% if data %}{{ data.lembagaBerwenang}}{% endif %}</option>  
+                    <option>Polsek</option>
+                  {% else %}
+                    <option>Polsek</option>  
+                    <option>Medcen</option>
+                  {% endif %}
+              </select>
             </div>
           <br><br>
           <p class="text-right">

@@ -47,7 +47,10 @@ class WebsiteResmi(db.Model):
     WebsiteResmiPolsek = db.Column(db.String(12), nullable=True)
     WebsiteResmiMedcen = db.Column(db.String(12), nullable=True)
 
-class ProsedurLapor(db.Model):
+class ProsedurLaporPolsek(db.Model):
     kodePolsek = db.Column(db.Integer, primary_key=True)    
     ProsedurLaporPolsek = db.Column(db.Text, nullable=True)
+
+class ProsedurLaporMedcen(db.Model):
+    kodePolsek = db.Column(db.Integer, primary_key=True)   
     ProsedurLaporMedcen = db.Column(db.Text, nullable=True)

@@ -16,15 +16,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for row in data4 %}
-                          <tr>
+                        <tr>
+                            {% for row in data4a %}
                             <td>{{row.kodePolsek}}</td>
                             <td>{{row.ProsedurLaporPolsek}}</td>
+                            {% endfor %}
+                            {% for row in data4b %}
                             <td>{{row.ProsedurLaporMedcen}}</td>
+                            {% endfor %}
                             <td></td>
                             <td></td>
                           </tr>
-                        {% endfor %}
                     </tbody>
                 </table>
                 <!--  -->

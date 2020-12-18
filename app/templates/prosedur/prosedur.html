@@ -34,25 +34,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {% for row in data %}
                             <tr>
-                                <td>{{row.kodePolsek}}</td>
-                                {% if current_user.username == 'polsek' %}
-                                    <td>{{row.ProsedurLaporPolsek}}</td>
-                                    <td></td>
-                                {% elif current_user.username == 'medcen' %}
-                                    <td>{{row.ProsedurLaporMedcen}}</td>
-                                    <td></td>
-                                {% endif %}
-                                <td></td>
-                                <td class="actions">
-                                    <buton data-toggle="modal" data-target="#md-footer-danger{{row[0]}}">
-                                        <i class="icon mdi mdi-delete"></i>
-                                    </buton>
-                                </td>
-                            </tr>                       
-                        {% endfor %}
+                                {% for row in data %}
+                                    {% if current_user.username == 'polsek' %}
+                                        <td>{{row.kodePolsek}}</td>
+                                        <td>{{row.ProsedurLaporPolsek}}</td>
+                                        <td></td>               
+                                        <td></td>
+                                        <td class="actions">
+                                            <a href="{{url_for('prosedurEdit', kodePolsek=row.kodePolsek)}}">
+                                                <i class="icon mdi mdi-edit"></i>
+                                            </a>&nbsp;&nbsp;
+                                            <buton data-toggle="modal" data-target="#md-footer-danger{{row.kodePolsek}}">
+                                                <i class="icon mdi mdi-delete"></i>
+                                            </buton>
+                                        </td>                    
+                                    {% endif %}
+                                {% endfor %}
+                                {% for row in data2 %}
+                                    {% if current_user.username == 'medcen' %}
+                                        <td>{{row.kodePolsek}}</td>
+                                        <td>{{row.ProsedurLaporMedcen}}</td>
+                                        <td></td>                    
+                                        <td></td>
+                                        <td class="actions">
+                                            <a href="{{url_for('prosedurEdit', kodePolsek=row.kodePolsek)}}">
+                                                <i class="icon mdi mdi-edit"></i>
+                                            </a>&nbsp;&nbsp;
+                                            <buton data-toggle="modal" data-target="#md-footer-danger{{row.kodePolsek}}">
+                                                <i class="icon mdi mdi-delete"></i>
+                                            </buton>
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>   
                     </tbody>
                 </table>
                 <!--  -->
@@ -63,7 +78,7 @@
 
 <!-- Delete -->
 {% for row in data %}
-<div id="md-footer-danger{{row[0]}}" tabindex="-1" role="dialog" class="modal fade">
+<div id="md-footer-danger{{row.kodePolsek}}" tabindex="-1" role="dialog" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
