@@ -1,7 +1,8 @@
 from app import app, db
 from flask import render_template, request, redirect, url_for, flash
 from .models import (Pribadi, Polsek, Medcen, DataLapor, 
-                    NomorLayanan, WebsiteResmi, ProsedurLaporPolsek, ProsedurLaporMedcen, User)
+                    NomorLayananPolsek, NomorLayananMedcen, WebsiteResmiPolsek, WebsiteResmiMedcen, 
+                    ProsedurLaporPolsek, ProsedurLaporMedcen, User)
 from flask_login import login_user, current_user, logout_user, login_required
 from .forms import LoginForm
 
@@ -12,7 +13,8 @@ from .forms import LoginForm
 def home():    
     return render_template('index.html', title='Dashboard', menu='dashboard', 
     data=Pribadi.query.all(), data2=Polsek.query.all(), data3=Medcen.query.all(), data4a=ProsedurLaporPolsek.query.all(), 
-    data4b=ProsedurLaporMedcen.query.all(), data5=NomorLayanan.query.all(), data6=WebsiteResmi.query.all(), data7=DataLapor.query.all())
+    data4b=ProsedurLaporMedcen.query.all(), data5a=NomorLayananPolsek.query.all(), data5b=NomorLayananMedcen.query.all(), 
+    data6a=WebsiteResmiPolsek.query.all(), data6b=WebsiteResmiMedcen.query.all(), data7=DataLapor.query.all())
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/login', methods=['GET','POST'])
@@ -250,30 +252,40 @@ def prosedurAdd():
     else:
         return render_template('prosedur/prosedurAdd.html', title='Tambah Prosedur', submenu='dataProsedur' ,link1='Data Prosedur', link2='Tambah Data Prosedur', link3='polsek/', dataPolsek=Polsek.query.all())
 
-@app.route('/prosedur/<kodePolsek>/ubah/', methods=['GET','POST'])
+@app.route('/prosedur/<id>/ubah/', methods=['GET','POST'])
 @login_required
-def prosedurEdit(kodePolsek):
-    data = ProsedurLaporPolsek.query.filter_by(kodePolsek=kodePolsek).first()
-    data2 = ProsedurLaporMedcen.query.filter_by(kodePolsek=kodePolsek).first()
+def prosedurEdit(id):
+    if current_user.username == 'polsek':
+        data = ProsedurLaporPolsek.query.filter_by(id=id).first()
+    if current_user.username == 'medcen':
+        data2 = ProsedurLaporMedcen.query.filter_by(id=id).first()
     if request.method == 'POST':
-        data.kodePolsek = request.form['kodePolsek']
-        data2.kodePolsek = request.form['kodePolsek']
-        data.ProsedurLaporPolsek = request.form['laporPolsek']
-        data2.ProsedurLaporMedcen = request.form['laporMedcen']
-        db.session.commit()
-        return redirect(url_for('prosedur'))
+        if current_user.username == 'polsek':
+            data.kodePolsek = request.form['kodePolsek']
+            data.ProsedurLaporPolsek = request.files['laporPolsek']
+            db.session.commit()
+            return redirect(url_for('prosedur'))
+        if current_user.username == 'medcen':
+            data2.kodePolsek = request.form['kodePolsek']
+            data2.ProsedurLaporMedcen = request.files['laporMedcen']
+            db.session.commit()
+            return redirect(url_for('prosedur'))
     else:
         return render_template('prosedur/prosedurAdd.html', title='Ubah Prosedur', submenu='dataProsedur' ,link1='Data Prosedur', link2='Ubah Data Prosedur', link3='prosedur/', data=data, dataPolsek=Polsek.query.all())
 
-@app.route('/prosedur/<kodePolsek>/hapus/', methods=['GET','POST'])
+@app.route('/prosedur/<id>/hapus/', methods=['GET','POST'])
 @login_required
-def prosedurDel(kodePolsek):
-    data = ProsedurLaporPolsek.query.filter_by(kodePolsek=kodePolsek).first()
-    data2 = ProsedurLaporMedcen.query.filter_by(kodePolsek=kodePolsek).first()
-    db.session.delete(data)
-    db.session.delete(data2)
-    db.session.commit()
-    return redirect(url_for('prosedur'))
+def prosedurDel(id):
+    if current_user.username == 'polsek':
+        data = ProsedurLaporPolsek.query.filter_by(id=id).first()
+        db.session.delete(data)
+        db.session.commit()
+        return redirect(url_for('prosedur'))
+    if current_user.username == 'medcen':
+        data2 = ProsedurLaporMedcen.query.filter_by(id=id).first()
+        db.session.delete(data2)
+        db.session.commit()
+        return redirect(url_for('prosedur'))
 
 # # Akhir Polsek
 
@@ -283,45 +295,62 @@ def prosedurDel(kodePolsek):
 @app.route('/nomor_layanan/')
 @login_required
 def layanan():
-    return render_template('layanan/layanan.html', title='Nomor Layanan', submenu='dataNomor Layanan', link1='Data Nomor Layanan' ,data=NomorLayanan.query.all())
+    return render_template('layanan/layanan.html', title='Nomor Layanan', submenu='dataNomor Layanan', link1='Data Nomor Layanan' ,data=NomorLayananPolsek.query.all(), data2=NomorLayananMedcen.query.all())
 
 @app.route('/nomor_layanan/tambah/', methods=['GET','POST'])
 @login_required
 def layananAdd():
     if request.method == 'POST':
         kodePolsek = request.form['kodePolsek']
-        layananPolsek = request.form['layananPolsek']
-        daruratPolsek = request.form['daruratPolsek']
-        layananMedcen = request.form['layananMedcen']
-        data = NomorLayanan(kodePolsek=kodePolsek, NomorLayananPolsek=layananPolsek, NomorDaruratPolsek=daruratPolsek, NomorLayananMedcen=layananMedcen)
-        db.session.add(data)
-        db.session.commit()
-        return redirect(url_for('layanan'))
+        if current_user.username == 'polsek':
+            layananPolsek = request.form['layananPolsek']
+            daruratPolsek = request.form['daruratPolsek']
+            data = NomorLayananPolsek(kodePolsek=kodePolsek, NomorLayananPolsek=layananPolsek, NomorDaruratPolsek=daruratPolsek)
+            db.session.add(data)
+            db.session.commit()
+            return redirect(url_for('layanan'))
+        if current_user.username == 'medcen':
+            layananMedcen = request.form['layananMedcen']
+            data2 = NomorLayananMedcen(kodePolsek=kodePolsek, NomorLayananMedcen=layananMedcen)
+            db.session.add(data2)
+            db.session.commit()
+            return redirect(url_for('layanan'))
     else:
         return render_template('layanan/layananAdd.html', title='Tambah Nomor Layanan', submenu='dataNomor Layanan' ,link1='Data Nomor Layanan', link2='Tambah Data Nomor Layanan', link3='nomor_layanan/', dataPolsek=Polsek.query.all())
 
-@app.route('/nomor_layanan/<kodePolsek>/ubah/', methods=['GET','POST'])
+@app.route('/nomor_layanan/<id>/ubah/', methods=['GET','POST'])
 @login_required
-def layananEdit(kodePolsek):
-    data = NomorLayanan.query.filter_by(kodePolsek=kodePolsek).first()
+def layananEdit(id):
+    data = NomorLayananPolsek.query.filter_by(id=id).first()
+    data2 = NomorLayananMedcen.query.filter_by(id=id).first()
     if request.method == 'POST':
-        data.kodePolsek = request.form['kodePolsek']
-        data.NomorLayananPolsek = request.form['layananPolsek']
-        data.NomorDaruratPolsek = request.form['daruratPolsek']
-        data.NomorLayananMedcen = request.form['layananMedcen']
-        # db.session.add(data)
+        if current_user.username == 'polsek':
+            data.kodePolsek = request.form['kodePolsek']
+            data.NomorLayananPolsek = request.form['layananPolsek']
+            data.NomorDaruratPolsek = request.form['daruratPolsek']
+            db.session.commit()
+            return redirect(url_for('layanan'))
+        if current_user.username == 'medcen':
+            data2.kodePolsek = request.form['kodePolsek']
+            data2.NomorLayananMedcen = request.form['layananMedcen']
+            db.session.commit()
+            return redirect(url_for('layanan'))
+    else:
+        return render_template('layanan/layananAdd.html', title='Ubah Nomor Layanan', submenu='dataNomor Layanan' ,link1='Data Nomor Layanan', link2='Ubah Data Nomor Layanan', link3='nomor_layanan/',data2=data2, data=data,  dataPolsek=Polsek.query.all())
+
+@app.route('/nomor_layanan/<id>/hapus/', methods=['GET','POST'])
+@login_required
+def layananDel(id):
+    if current_user.username == 'polsek':
+        data = NomorLayananPolsek.query.filter_by(id=id).first()
+        db.session.delete(data)
         db.session.commit()
         return redirect(url_for('layanan'))
-    else:
-        return render_template('layanan/layananAdd.html', title='Ubah Nomor Layanan', submenu='dataNomor Layanan' ,link1='Data Nomor Layanan', link2='Ubah Data Nomor Layanan', link3='nomor_layanan/', data=data, dataPolsek=Polsek.query.all())
-
-@app.route('/nomor_layanan/<kodePolsek>/hapus/', methods=['GET','POST'])
-@login_required
-def layananDel(kodePolsek):
-    data = NomorLayanan.query.filter_by(kodePolsek=kodePolsek).first()
-    db.session.delete(data)
-    db.session.commit()
-    return redirect(url_for('layanan'))
+    elif current_user.username == 'medcen':
+        data2 = NomorLayananMedcen.query.filter_by(id=id).first()
+        db.session.delete(data2)
+        db.session.commit()
+        return redirect(url_for('layanan'))        
 
 # Akhir NomorLayanan
 
@@ -330,45 +359,65 @@ def layananDel(kodePolsek):
 
 @app.route('/website_resmi/')
 @login_required
-def website_resmi():
-    return render_template('webresmi/webresmi.html', title='Website Resmi', submenu='dataWebsite Resmi', link1='Data Website Resmi' ,data=WebsiteResmi.query.all())
+def webresmi():
+    return render_template('webresmi/webresmi.html', title='Website Resmi', submenu='dataWebsite Resmi', link1='Data Website Resmi' ,data=WebsiteResmiPolsek.query.all(), data2=WebsiteResmiMedcen.query.all())
 
 @app.route('/website_resmi/tambah/', methods=['GET','POST'])
 @login_required
-def website_resmiAdd():
+def webresmiAdd():
     if request.method == 'POST':
         kodePolsek = request.form['kodePolsek']
-        webPolsek = request.form['webPolsek']
-        webMedcen = request.form['webMedcen']
-        data = WebsiteResmi(kodePolsek=kodePolsek, WebsiteResmiPolsek=webPolsek, WebsiteResmiMedcen=webMedcen)
-        db.session.add(data)
-        db.session.commit()
-        return redirect(url_for('website_resmi'))
+        if current_user.username == 'polsek':
+            webPolsek = request.form['webPolsek']
+            data = WebsiteResmiPolsek(kodePolsek=kodePolsek, WebsiteResmiPolsek=webPolsek)
+            db.session.add(data)
+            db.session.commit()
+            return redirect(url_for('webresmi'))
+        if current_user.username == 'medcen':
+            webMedcen = request.form['webMedcen']
+            data2 = WebsiteResmiMedcen(kodePolsek=kodePolsek, WebsiteResmiMedcen=webMedcen)
+            db.session.add(data2)
+            db.session.commit()
+            return redirect(url_for('webresmi'))
     else:
         return render_template('webresmi/webresmiAdd.html', title='Tambah Website Resmi', submenu='dataWebsite Resmi' ,link1='Data Website Resmi', link2='Tambah Data Website Resmi', link3='website_resmi/', dataPolsek=Polsek.query.all())
 
-@app.route('/website_resmi/<kodePolsek>/ubah/', methods=['GET','POST'])
+@app.route('/website_resmi/<id>/ubah/', methods=['GET','POST'])
 @login_required
-def website_resmiEdit(kodePolsek):
-    data = WebsiteResmi.query.filter_by(kodePolsek=kodePolsek).first()
+def webresmiEdit(id):
+    data = WebsiteResmiPolsek.query.filter_by(id=id).first()
+    data2 = WebsiteResmiMedcen.query.filter_by(id=id).first()
     if request.method == 'POST':
-        data.kodePolsek = request.form['kodePolsek']
-        data.WebsiteResmiPolsek = request.form['webPolsek']
-        data.WebsiteResmiMedcen = request.form['webMedcen']
-        db.session.commit()
-        return redirect(url_for('website_resmi'))
+        if current_user.username == 'polsek':
+            data.kodePolsek = request.form['kodePolsek']
+            data.WebsiteResmiPolsek = request.form['webPolsek']
+            db.session.commit()
+            return redirect(url_for('webresmi'))
+        if current_user.username == 'medcen':
+            data2.kodePolsek = request.form['kodePolsek']
+            data2.WebsiteResmiMedcen = request.form['webMedcen']
+            db.session.commit()
+            return redirect(url_for('webresmi'))
     else:
-        return render_template('webresmi/webresmiAdd.html', title='Ubah Website Resmi', submenu='dataWebsite Resmi' ,link1='Data Website Resmi', link2='Ubah Data Website Resmi', link3='website_resmi/', data=data, dataPolsek=Polsek.query.all())
+        return render_template('webresmi/webresmiAdd.html', title='Ubah Website Resmi', submenu='dataWebsite Resmi' ,link1='Data Website Resmi', link2='Ubah Data Website Resmi', link3='website_resmi/',data2=data2, data=data,  dataPolsek=Polsek.query.all())
 
-@app.route('/website_resmi/<kodePolsek>/hapus/', methods=['GET','POST'])
+@app.route('/website_resmi/<id>/hapus/', methods=['GET','POST'])
 @login_required
-def website_resmiDel(kodePolsek):
-    data = WebsiteResmi.query.filter_by(kodePolsek=kodePolsek).first()
-    db.session.delete(data)
-    db.session.commit()
-    return redirect(url_for('website_resmi'))
+def webresmiDel(id):
+    if current_user.username == 'polsek':
+        data = WebsiteResmiPolsek.query.filter_by(id=id).first()
+        db.session.delete(data)
+        db.session.commit()
+        return redirect(url_for('webresmi'))
+    elif current_user.username == 'medcen':
+        data2 = WebsiteResmiMedcen.query.filter_by(id=id).first()
+        db.session.delete(data2)
+        db.session.commit()
+        return redirect(url_for('webresmi'))    
 
 # Akhir WebsiteResmi
+
+
 
 
 

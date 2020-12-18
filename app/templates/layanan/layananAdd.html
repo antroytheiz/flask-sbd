@@ -16,31 +16,38 @@
           <div class="form-group">
             <label>kode Polsek</label>
             <select name="kodePolsek" parsley-trigger="change" required="" placeholder="Masukan Pekerjaan" autocomplete="off" class="form-control">
-                <option>{% if data %}{{data.kodePolsek}} {% else %} -- Pilih Kode Polsek -- {% endif %} </option>
-                {% for data in dataPolsek %}
-                  <option>{{data.kodePolsek}}</option>
-                {% endfor %}
+                {% if current_user.username == 'polsek' %}
+                  <option>{% if data %}{{data.kodePolsek}} {% else %} -- Pilih Kode Polsek -- {% endif %} </option>
+                  {% for data in dataPolsek %}
+                    <option>{{data.kodePolsek}}</option>
+                  {% endfor %}
+                {% elif current_user.username == 'medcen' %}
+                  <option>{% if data2 %}{{data2.kodePolsek}} {% else %} -- Pilih Kode Polsek -- {% endif %} </option>
+                  {% for data2 in dataPolsek %}
+                    <option>{{data2.kodePolsek}}</option>
+                  {% endfor %}
+                {% endif %}
             </select>
           </div>
           {% if current_user.username == 'polsek' %}
             <div class="form-group">
               <label>Nomor Layanan Polsek</label>
-              <input type="text" maxlength="12" name="layananPolsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.NomorLayananPolsek}}{% endif %}{% if current_user.username == 'medcen' and not data %}0{%endif%}" {% if data and current_user.username == 'medcen' or current_user.username == 'medcen' %} readonly {% endif %}>
+              <input type="text" maxlength="12" name="layananPolsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.NomorLayananPolsek}}{% endif %}" placeholder=" Masukan Nomor Layanan">
             </div>
             <div class="form-group">
                 <label>Nomor Darurat Polsek</label>
-                <input type="text" maxlength="12" name="daruratPolsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.NomorDaruratPolsek}}{% endif %}{% if current_user.username == 'medcen' and not data %}0{%endif%}" {% if data and current_user.username == 'medcen' or current_user.username == 'medcen' %} readonly {% endif %}>
+                <input type="text" maxlength="12" name="daruratPolsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.NomorDaruratPolsek}}{% endif %}" placeholder=" Masukan Nomor Layanan">
             </div>
           {% elif current_user.username == 'medcen' %}
             <div class="form-group">
               <label>Nomor Layanan Medcen</label>
-              <input type="text" maxlength="12" name="layananMedcen" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.NomorLayananMedcen}}{% endif %}{% if current_user.username == 'polsek' and not data %}0{%endif%}" {% if data and current_user.username == 'polsek'  or current_user.username == 'polsek' %} readonly {% endif %}>
+              <input type="text" maxlength="12" name="layananMedcen" required="" autocomplete="off" class="form-control" value="{% if data2 %}{{data2.NomorLayananMedcen}}{% endif %}" placeholder=" Masukan Nomor Layanan">
             </div>
           {% endif %}
           <br><br>
           <p class="text-right">
-            <button type="submit" class="btn btn-space btn-primary">{% if data %}Simpan {% else %}Tambah{% endif %}</button>
-            <a href="{% if title == 'Tambah Pribadi' or 'Ubah Pribadi' %} /nomor_layanan/ {% else %} /nomor_layanan/ {% endif %}" class="btn btn-space btn-default">Batal</a>
+            <button type="submit" class="btn btn-space btn-primary">{% if data or data2 %}Simpan {% else %}Tambah{% endif %}</button>
+            <a href="{% if title == 'Tambah Nomor Layanan' or 'Ubah Nomor Layanan' %} /nomor_layanan/ {% else %} /nomor_layanan/ {% endif %}" class="btn btn-space btn-default">Batal</a>
           </p>
         </form>
       </div>

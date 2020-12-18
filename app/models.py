@@ -21,7 +21,8 @@ class Pribadi(db.Model):
     nomorHP = db.Column(db.Integer)
 
 class Polsek(db.Model):
-    kodePolsek = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    kodePolsek = db.Column(db.Integer, unique=False)
     namaPolsek = db.Column(db.String(100))
     alamatKantor = db.Column(db.String(100))
 
@@ -36,21 +37,33 @@ class DataLapor(db.Model):
     nomorHP = db.Column(db.Integer)
     lembagaBerwenang = db.Column(db.String(50))
 
-class NomorLayanan(db.Model):
-    kodePolsek = db.Column(db.Integer, primary_key=True)
+class NomorLayananPolsek(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    kodePolsek = db.Column(db.Integer, unique=False)
     NomorLayananPolsek = db.Column(db.Integer, nullable=True)
-    NomorLayananMedcen = db.Column(db.Integer, nullable=True)
     NomorDaruratPolsek = db.Column(db.Integer, nullable=True)
 
-class WebsiteResmi(db.Model):
-    kodePolsek = db.Column(db.Integer, primary_key=True)
+class NomorLayananMedcen(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    kodePolsek = db.Column(db.Integer, unique=False)
+    NomorLayananMedcen = db.Column(db.Integer, nullable=True)
+
+class WebsiteResmiPolsek(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    kodePolsek = db.Column(db.Integer, unique=False)
     WebsiteResmiPolsek = db.Column(db.String(12), nullable=True)
-    WebsiteResmiMedcen = db.Column(db.String(12), nullable=True)
+
+class WebsiteResmiMedcen(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    kodePolsek = db.Column(db.Integer, unique=False)
+    WebsiteResmiMedcen = db.Column(db.String(12), nullable=True)    
 
 class ProsedurLaporPolsek(db.Model):
-    kodePolsek = db.Column(db.Integer, primary_key=True)    
+    id = db.Column(db.Integer, primary_key=True)    
+    kodePolsek = db.Column(db.Integer, unique=False)
     ProsedurLaporPolsek = db.Column(db.Text, nullable=True)
 
 class ProsedurLaporMedcen(db.Model):
-    kodePolsek = db.Column(db.Integer, primary_key=True)   
+    id = db.Column(db.Integer, primary_key=True)   
+    kodePolsek = db.Column(db.Integer, unique=False)
     ProsedurLaporMedcen = db.Column(db.Text, nullable=True)

@@ -11,7 +11,7 @@
     <div class="col-sm-12">
         <div class="panel panel-default panel-table">
             <div class="panel-heading">{{title}}&nbsp;&nbsp;&nbsp;
-                <a href="{{ url_for ('website_resmiAdd') }}">
+                <a href="{{ url_for ('webresmiAdd') }}">
                     <button class="btn btn-space btn-primary">
                         <div class="icon mdi mdi-plus-circle-o">&nbsp;Tambah&nbsp; &nbsp; &nbsp; </div> 
                     </button>
@@ -33,25 +33,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
                         {% for row in data %}
                             <tr>
+                            {% if current_user.username == 'polsek' %}
                                 <td>{{row.kodePolsek}}</td>
-                                {% if current_user.username == 'polsek' %}
-                                    <td>{{row.WebsiteResmiPolsek}}</td>
-                                {% elif current_user.username == 'medcen' %}
-                                    <td>{{row.WebsiteResmiMedcen}}</td>
-                                {% endif %}
+                                <td>{{row.WebsiteResmiPolsek}}</td>              
                                 <td></td>
                                 <td class="actions">
-                                    <a href="{{url_for('website_resmiEdit', kodePolsek=row.kodePolsek)}}">
+                                    <a href="{{ url_for ('webresmiEdit', id=row.id)}}">
                                         <i class="icon mdi mdi-edit"></i>
                                     </a>&nbsp;&nbsp;
-                                    <buton data-toggle="modal" data-target="#md-footer-danger{{row.kodePolsek}}">
+                                    <buton data-toggle="modal" data-target="#md-footer-danger{{row.id}}">
+                                        <i class="icon mdi mdi-delete"></i>
+                                    </buton>
+                                </td>                    
+                            {% endif %}
+                            </tr>
+                        {% endfor %}
+                        {% for row in data2 %}
+                            <tr>
+                            {% if current_user.username == 'medcen' %}
+                                <td>{{row.kodePolsek}}</td>
+                                <td>{{row.WebsiteResmiMedcen}}</td>                   
+                                <td></td>
+                                <td class="actions">
+                                    <a href="{{ url_for ('webresmiEdit', id=row.id)}}">
+                                        <i class="icon mdi mdi-edit"></i>
+                                    </a>&nbsp;&nbsp;
+                                    <buton data-toggle="modal" data-target="#md-footer-danger{{row.id}}">
                                         <i class="icon mdi mdi-delete"></i>
                                     </buton>
                                 </td>
-                            </tr>                       
+                            {% endif %}
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -78,7 +92,29 @@
         </div>
         <div class="modal-footer">
           <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-            <a href="{{ url_for ('website_resmiDel', kodePolsek=row.kodePolsek)}}" class="btn btn-danger">Delete</a>
+            <a href="{{ url_for ('webresmiDel', kodePolsek=row.kodePolsek)}}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+</div>  
+{% endfor %}
+{% for row in data2 %}
+<div id="md-footer-danger{{row.id}}" tabindex="-1" role="dialog" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><span class="mdi mdi-close"></span></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <div class="text-danger"><span class="modal-main-icon mdi mdi-close-circle-o"></span></div>
+            <h3>Pemberitahuan</h3>
+            <p>Apakah anda yakin akan menghapus data ini? jika ya silakan klik Delete.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+            <a href="{{ url_for ('webresmiDel', id=row.id)}}" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>

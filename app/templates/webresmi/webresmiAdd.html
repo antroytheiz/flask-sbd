@@ -25,12 +25,12 @@
             {% if current_user.username == 'polsek' %}
               <div class="form-group">
                 <label>Website Resmi Polsek</label>
-                <input type="text" name="webPolsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.WebsiteResmiPolsek}}{% endif %}{% if current_user.username == 'medcen' and not data %}0{%endif%}" {% if data and current_user.username == 'medcen' or current_user.username == 'medcen' %} readonly {% endif %}>
+                <input type="text" name="webPolsek" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.WebsiteResmiPolsek}}{% endif %}" placeholder="https://example.com">
               </div>
             {% else %}
               <div class="form-group">
                 <label>Website Resmi Medcen</label>
-                <input type="text" name="webMedcen" required="" autocomplete="off" class="form-control" value="{% if data %}{{data.WebsiteResmiMedcen}}{% endif %}{% if current_user.username == 'polsek' and not data %}0{%endif%}" {% if data and current_user.username == 'polsek'  or current_user.username == 'polsek' %} readonly {% endif %}>
+                <input type="text" name="webMedcen" required="" autocomplete="off" class="form-control" value="{% if data2 %}{{data2.WebsiteResmiMedcen}}{% endif %}" placeholder="https://example.com">
               </div>
             {% endif %}
           <br><br>
