@@ -1,6 +1,9 @@
 # flask-sbd
 Web App Implementasi Sistem Basis Data
 
+### Demo
+https://sbd-proyek.herokuapp.com/login
+
 ### System Requirements
  - Bahasa Utama
     - Python
