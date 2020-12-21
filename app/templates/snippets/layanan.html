@@ -18,14 +18,16 @@
                     </thead>
                     <tbody>
                       {% for row in data5a %}
+                      <tr>
+                        <td>{{row.kodePolsek}}</td>
+                        <td>{{row.NomorLayananPolsek}}</td>
+                        <td>{{row.NomorDaruratPolsek}}</td>
+                      {% endfor %}
                       {% for row1 in data5b %}
-                        <tr>
-                          <td>{{row.kodePolsek}}</td>
-                          <td>{{row.NomorLayananPolsek}}</td>
-                          <td>{{row.NomorDaruratPolsek}}</td>
-                          <td>{{row1.NomorLayananMedcen}}</td>
-                        </tr>
-                        {% endfor %}
+                        <td>{{row1.NomorLayananMedcen}}</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
                       {% endfor %}
                     </tbody>
                 </table>

@@ -17,15 +17,15 @@
                     </thead>
                     <tbody>
                         {% for row in data4a %}
-                            {% for row1 in data4b %}
-                            <tr>
-                                <td>{{row.kodePolsek}}</td>
-                                <td>{{row.ProsedurLaporPolsek}}</td>
-                                <td>{{row1.ProsedurLaporMedcen}}</td>
-                                <td></td>
-                                <td></td>          
-                            </tr>
-                            {% endfor %}
+                        <tr>
+                            <td>{{row.kodePolsek}}</td>
+                            <td>{{row.ProsedurLaporPolsek}}</td> 
+                        {% endfor %}
+                        {% for row1 in data4b %}
+                            <td>{{row1.ProsedurLaporMedcen}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>

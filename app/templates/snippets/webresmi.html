@@ -17,13 +17,15 @@
                     </thead>
                     <tbody>
                         {% for row in data6a %}
-                        {% for row1 in data6b %}
                           <tr>
                             <td>{{row.kodePolsek}}</td>
                             <td>{{row.WebsiteResmiPolsek}}</td>
+                        {% endfor %}
+                        {% for row1 in data6b %}
                             <td>{{row1.WebsiteResmiMedcen}}</td>
+                            <td></td>
+                            <td></td>
                           </tr>
-                          {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
